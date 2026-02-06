@@ -1,11 +1,11 @@
 ---
-name: md-to-docx
-description: Convert markdown to beautifully styled Word documents with custom fonts, colors, and table styling. Use when someone wants to export markdown as a professional DOCX.
+name: md-to-docx-template
+description: Convert markdown to beautifully styled Word documents using custom templates. Supports branded fonts, colors, and table styling. Extract styles from existing docs or generate fresh templates.
 ---
 
-# Markdown to DOCX Converter
+# Markdown to DOCX with Templates
 
-Convert markdown files to professionally styled Word documents with custom branding.
+Convert markdown to professionally styled Word documents. Not plain exports — beautiful, branded documents with your fonts, colors, and table styling applied automatically.
 
 ## When to Use
 
@@ -24,8 +24,8 @@ Convert markdown files to professionally styled Word documents with custom brand
 Clone this skill's scripts to your preferred location:
 
 ```bash
-git clone https://github.com/jonnyhump/jonny-skills.git
-cd jonny-skills/skills/md-to-docx
+git clone https://github.com/jonnyschneider/skills.git
+cd skills/skills/md-to-docx-template
 pip install python-docx lxml click pyyaml
 ```
 
