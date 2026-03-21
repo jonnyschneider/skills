@@ -24,7 +24,7 @@ Convert markdown to professionally styled Word documents. Not plain exports — 
 Clone this skill's scripts to your preferred location:
 
 ```bash
-git clone https://github.com/jonnyschneider/skills.git
+git clone https://github.com/jonnyschneider/skills
 cd skills/skills/md-to-docx-template
 pip install python-docx lxml click pyyaml
 ```

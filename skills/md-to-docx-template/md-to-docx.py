@@ -35,11 +35,16 @@ DEFAULT_TEMPLATE_DIR = Path(__file__).parent / 'templates'
 DEFAULT_TEMPLATE = DEFAULT_TEMPLATE_DIR / 'vanilla.docx'
 
 
-def resolve_path(path, base_dir):
-    """Resolve a path relative to a base directory."""
-    if os.path.isabs(path):
-        return path
-    return os.path.normpath(os.path.join(base_dir, path))
+def resolve_path(path, base_dir, allow_escape=False):
+    """Resolve a path relative to a base directory.
+
+    By default, rejects paths that resolve outside base_dir (path traversal guard).
+    Set allow_escape=True for output paths that legitimately live elsewhere.
+    """
+    resolved = os.path.normpath(os.path.join(base_dir, path)) if not os.path.isabs(path) else os.path.normpath(path)
+    if not allow_escape and not resolved.startswith(os.path.normpath(base_dir) + os.sep) and resolved != os.path.normpath(base_dir):
+        raise click.ClickException(f"Path escapes base directory: {path}")
+    return resolved
 
 
 def ensure_default_template():
@@ -265,7 +270,7 @@ def _run_manifest_mode(manifest_path, template_override, open_file, dry_run, no_
     else:
         template_path = ensure_default_template()
 
-    output_path = Path(resolve_path(config['output'], str(manifest_dir)))
+    output_path = Path(resolve_path(config['output'], str(manifest_dir), allow_escape=True))
     page_breaks = config.get('page_break_between_sections', True)
     toc = config.get('toc', False)
 
